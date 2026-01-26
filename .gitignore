@@ -30,27 +30,68 @@
 *.exe
 *.out
 *.app
-/bin/debug
-/bld/.vs/MUSI6106/v16/*.suo
-bld
-/lib/debug/*.exp
-/*.bak
-/src/MUSI6106Exec/*.bak
-/src/Tests/TestExec/*.bak
-/src/Tests/Tests/*.bak
-/src/CombFilter/*.bak
-/src/inc/*.bak
-/bin
-/doc
-/lib
-/src/Dtw/*.bak
-/inc/*.bak
-/src/AudioFileIO/*.bak
-/3rdparty/sndlib/autom4te.cache/output.0
-/3rdparty/sndlib/autom4te.cache/output.1
-/3rdparty/sndlib/autom4te.cache/requests
-/3rdparty/sndlib/autom4te.cache/traces.0
-/3rdparty/sndlib/autom4te.cache/traces.1
 
-#MacSpecific
+# Build directories
+/bin
+/lib
+/doc
+bld/
+build/
+cmake-build-*/
+out/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# IDE: CLion
+.idea/
+cmake-build-*/
+
+# IDE: VSCode
+.vscode/
+*.code-workspace
+
+# IDE: Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj
+*.vcxproj.filters
+*.sln
+
+# IDE: Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Third party cache/config
+/3rdparty/sndlib/autom4te.cache/
