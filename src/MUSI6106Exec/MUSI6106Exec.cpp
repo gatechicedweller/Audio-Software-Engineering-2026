@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 void     showClInfo()
 {
     cout << "MUSI6106 Assignment Executable" << endl;
-    cout << "(c) 2014-2022 by Alexander Lerch" << endl;
+    cout << "(c) 2014-2026 by Alexander Lerch" << endl;
     cout  << endl;
 
     return;
