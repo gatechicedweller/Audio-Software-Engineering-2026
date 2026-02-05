@@ -16,7 +16,6 @@ Error_t CAudioFileIf::create( CAudioFileIf*& pCInstance )
 {
 #ifdef WITH_SNDLIB
     pCInstance   = new CAudioFileSndLib ();
-    cout<<"CAudioFileIf::create"<<endl;
 #else
     pCInstance   = new CAudioFileRaw ();
 #endif
@@ -31,7 +30,6 @@ Error_t CAudioFileIf::destroy( CAudioFileIf*& pCInstance )
 {
     delete pCInstance;
     pCInstance  = 0;
-    cout<<"CAudioFileIf::destroy"<<endl;
     return Error_t::kNoError;
 }
 
