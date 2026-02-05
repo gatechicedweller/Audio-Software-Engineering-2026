@@ -30,11 +30,10 @@ Error_t CAudioFileIf::destroy( CAudioFileIf*& pCInstance )
 {
     delete pCInstance;
     pCInstance  = 0;
-
     return Error_t::kNoError;
 }
 
-CAudioFileIf::CAudioFileIf() : 
+CAudioFileIf::CAudioFileIf() :
     m_eIoType(kFileRead),
     m_bWithClipping(true),
     m_bIsInitialized(false),
@@ -59,7 +58,7 @@ Error_t CAudioFileIf::reset( bool bFreeMemory /*= false*/ )
         if (eErr != Error_t::kNoError)
             return eErr;
     }
-  
+
     eErr = initDefaults ();
     if (eErr != Error_t::kNoError)
         return eErr;
@@ -146,7 +145,7 @@ long long CAudioFileIf::convFrames2Bytes( long long iNumFrames )
 
 long long CAudioFileIf::convBytes2Frames( long long iNumBytes )
 {
-    return iNumBytes/(m_iNumBytesPerSample * getNumChannels());    
+    return iNumBytes/(m_iNumBytesPerSample * getNumChannels());
 }
 
 Error_t CAudioFileIf::getFileSpec( FileSpec_t &sFileSpec )
@@ -186,7 +185,7 @@ Error_t CAudioFileIf::setPosition( double dTimeInS /*= .0*/ )
     return setPosition (iPosInFrames);
 }
 
-Error_t CAudioFileIf::getLength( long long &iLengthInFrames ) 
+Error_t CAudioFileIf::getLength( long long &iLengthInFrames )
 {
     iLengthInFrames = -1;
 
@@ -240,7 +239,7 @@ Error_t CAudioFileIf::getPosition( double &dTimeInS )
     return Error_t::kNoError;
 }
 
-Error_t CAudioFileIf::getLength( double &dLengthInSeconds ) 
+Error_t CAudioFileIf::getLength( double &dLengthInSeconds )
 {
     long long iLengthInFrames;
     dLengthInSeconds = -1.;
