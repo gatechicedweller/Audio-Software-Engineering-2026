@@ -89,8 +89,7 @@ int main(int argc, char* argv[])
 
     //////////////////////////////////////////////////////////////////////////////
     // get audio data and write it to the output text file (one column per channel)
-    while (!phAudioFile->isEof())
-    {
+    while (!phAudioFile->isEof()) {
         // set block length variable
         long long iNumFrames = kBlockSize;
 
@@ -109,6 +108,9 @@ int main(int argc, char* argv[])
             hOutputFile << endl;
         }
     }
+
+    long long iNumFrames = kBlockSize;
+    phAudioFile->readData(ppfAudioData, iNumFrames);
 
     cout << "\nreading/writing done in: \t" << (clock() - time) * 1.F / CLOCKS_PER_SEC << " seconds." << endl;
 
