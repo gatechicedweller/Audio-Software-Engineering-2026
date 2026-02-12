@@ -10,8 +10,7 @@ file(GLOB ${APP}_HEADERS RELATIVE ${CMAKE_SOURCE_DIR}/src/${APP} *.h ../inc/*.h)
 add_inc_directories()
 
 ## create the target
-add_executable(${APP} ${${APP}_SOURCES} ${${APP}_HEADERS}
-        ../inc/RingBuffer.h)
+add_executable(${APP} ${${APP}_SOURCES} ${${APP}_HEADERS})
 
 # modern target-specific includes
 target_include_directories(${APP} PRIVATE
