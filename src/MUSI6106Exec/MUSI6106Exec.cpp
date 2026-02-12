@@ -3,6 +3,7 @@
 
 #include "MUSI6106Config.h"
 
+#include <iostream>
 #include "RingBuffer.h"
 
 using std::cout;

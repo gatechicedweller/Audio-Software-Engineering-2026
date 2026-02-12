@@ -1,59 +1,52 @@
-
-#ifndef MUSI6106_RINGBUFFER_H
-#define MUSI6106_RINGBUFFER_H
-
-
+#if !defined(__RingBuffer_hdr__)
+#define __RingBuffer_hdr__
 
 #include <cassert>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
-#include <iostream>
 
-// TODO: Clear out each of the cout and implement intended functionality
-
+/*! \brief implement a circular buffer of type T
+*/
 template <class T>
 class CRingBuffer
 {
 public:
     explicit CRingBuffer(int iBufferLengthInSamples) :
-    m_iBuffLength(iBufferLengthInSamples),
-    m_iReadIdx(0),
-    m_iWriteIdx(0),
-    m_ptBuff(0)
-
+        m_iBuffLength(iBufferLengthInSamples),
+        m_iReadIdx(0),
+        m_iWriteIdx(0),
+        m_ptBuff(0)
     {
         assert(iBufferLengthInSamples > 0);
-        std::cout <<"constructor allocations not implemented" << std::endl;
-        // allocate and init
-        // First step: allocate and initialize m_ptBuff in the constructor.
-        // Nothing else will work until you do.
-    }
 
-    // explicitly deleting copy constructor
-    CRingBuffer(const CRingBuffer&) = delete;
-    CRingBuffer& operator=(const CRingBuffer&) = delete;
+        m_ptBuff = new T[m_iBuffLength];
+        reset();
+    }
 
     virtual ~CRingBuffer()
     {
         delete[] m_ptBuff;
         m_ptBuff = 0;
-
     }
+
     /*! add a new value of type T to write index and increment write index
-       \param tNewValue the new value
-       \return void
-       */
-    void putPostInc (T tNewValue)
+    \param tNewValue the new value
+    \return void
+    */
+    void putPostInc(T tNewValue)
     {
-        std::cout <<"putPostInc() not implemented" << std::endl;
+        put(tNewValue);
+        incIdx(m_iWriteIdx);
     }
 
     /*! add a new value of type T to write index
+    \param tNewValue the new value
+    \return void
     */
     void put(T tNewValue)
     {
-        std::cout <<"put() not implemented" << std::endl;
+        m_ptBuff[m_iWriteIdx] = tNewValue;
     }
 
     /*! return the value at the current read index and increment the read pointer
@@ -61,8 +54,9 @@ public:
     */
     T getPostInc()
     {
-        std::cout <<"getPostInc() not implemented" << std::endl;
-        return static_cast<T>(-1);
+        T tValue = get();
+        incIdx(m_iReadIdx);
+        return tValue;
     }
 
     /*! return the value at the current read index
@@ -70,8 +64,7 @@ public:
     */
     T get() const
     {
-        std::cout <<"get() not implemented" << std::endl;
-        return static_cast<T>(-1);
+        return m_ptBuff[m_iReadIdx];
     }
 
     /*! set buffer content and indices to 0
@@ -79,9 +72,9 @@ public:
     */
     void reset()
     {
-
-        std::cout <<"reset() not implemented" << std::endl;
-
+        std::memset (m_ptBuff, 0, sizeof(T)*m_iBuffLength);
+        m_iReadIdx  = 0;
+        m_iWriteIdx = 0;
     }
 
     /*! return the current index for writing/put
@@ -89,16 +82,16 @@ public:
     */
     int getWriteIdx() const
     {
-        std::cout <<"getWriteInx() not implemented" << std::endl;
-        return -1;
+        return m_iWriteIdx;
     }
 
     /*! move the write index to a new position
+    \param iNewWriteIdx: new position
+    \return void
     */
     void setWriteIdx(int iNewWriteIdx)
     {
-        std::cout <<"setWriteIdx() not implemented" << std::endl;
-
+        incIdx(m_iWriteIdx, iNewWriteIdx - m_iWriteIdx);
     }
 
     /*! return the current index for reading/get
@@ -106,15 +99,16 @@ public:
     */
     int getReadIdx() const
     {
-        std::cout <<"getReadIdx() not implemented" << std::endl;
-        return -1;
+        return m_iReadIdx;
     }
 
     /*! move the read index to a new position
+    \param iNewReadIdx: new position
+    \return void
     */
     void setReadIdx(int iNewReadIdx)
     {
-        std::cout <<"setReadIdx() implemented" << std::endl;
+        incIdx(m_iReadIdx, iNewReadIdx - m_iReadIdx);
     }
 
     /*! returns the number of values currently buffered (note: 0 could also mean the buffer is full!)
@@ -122,11 +116,7 @@ public:
     */
     int getNumValuesInBuffer() const
     {
-        // HINT:
-        // How can the distance between read and write indices
-        // tell you how many samples are buffered?
-        std::cout <<"getNumValuesInBuffer() not implemented" << std::endl;
-        return -1;
+        return (m_iWriteIdx - m_iReadIdx + m_iBuffLength) % m_iBuffLength;
     }
 
     /*! returns the length of the internal buffer
@@ -134,36 +124,26 @@ public:
     */
     int getLength() const
     {
-        std::cout <<"getLength() not implemented" << std::endl;
-        return -1;
+        return m_iBuffLength;
     }
 private:
-    // We make this default constructor private because this class cannot function without a buffer length.
     CRingBuffer();
+    CRingBuffer(const CRingBuffer& that);
 
-    /*! Implement the coreRingBuffer mechanics here
-    // Input reference to write or read index and specified offset count, ensure it wraps around the buffer legnth
-    \return void
-    */
-    void incIdx(int& iIdx, int iOffset = 1) {
+    void incIdx(int& iIdx, int iOffset = 1)
+    {
+        while ((iIdx + iOffset) < 0)
+        {
+            // avoid negative buffer indices
+            iOffset += m_iBuffLength;
+        }
+        iIdx = (iIdx + iOffset) % m_iBuffLength;
+    };
 
-    }
     int m_iBuffLength,      //!< length of the internal buffer
-       m_iReadIdx,         //!< current read index
-       m_iWriteIdx;        //!< current write index
+        m_iReadIdx,         //!< current read index
+        m_iWriteIdx;        //!< current write index
 
-    // internal pointer to the buffer memory, why is it private? (rationalize)
     T* m_ptBuff;            //!< data buffer
-
-
-
-
-
-
-
-
-
-
-
 };
-#endif //
+#endif // __RingBuffer_hdr__
