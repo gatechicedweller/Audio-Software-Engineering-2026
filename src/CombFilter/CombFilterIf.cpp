@@ -27,7 +27,7 @@ CCombFilterIf::~CCombFilterIf ()
 {
     this->reset ();
 }
-
+/*
 const int  CCombFilterIf::getVersion (const Version_t eVersionIdx)
 {
     int iVersion = 0;
@@ -50,10 +50,14 @@ const int  CCombFilterIf::getVersion (const Version_t eVersionIdx)
 
     return iVersion;
 }
+    */
+   /*
 const char*  CCombFilterIf::getBuildDate ()
 {
     return kCMyProjectBuildDate;
 }
+*/
+//==================================================================
 
 //all these errors: if you just try to create a comb filter, and not an FIR and not an IIR, we will kill ourselves. a comb filter on its own is not a thing.
 
@@ -89,9 +93,7 @@ Error_t CCombFilterIf::setParam (FilterParam_t eParam, float fParamValue)
 
 float CCombFilterIf::getParam (FilterParam_t eParam) const
 {
-    if (eParam == kParamGain)
-    {
-        return 0.0f;
-    }
+
     return 0;
 }
+

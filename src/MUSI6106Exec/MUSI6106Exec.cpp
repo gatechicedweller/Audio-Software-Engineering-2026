@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
 
     //////////////////////////////////////////////////////////////////////////////
     // get audio data and write it to the output text file (one column per channel)
-    // apply comb filter
+    // apply comb filter IN THIS LOOP
     while (!phAudioFile->isEof()) {
         // set block length variable
         long long iNumFrames = kBlockSize;

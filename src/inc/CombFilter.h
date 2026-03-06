@@ -1,7 +1,11 @@
-namespace Filter
+class FIR : public CCombFilterIf
 {
-    virtual class CombFilter
-    {
-        
-    }
+
+}
+
+class IIR : public CCombFilterIf
+{
+    public:
+        static Error_t create (CCombFilterIf*& pCCombFilterIf) override;
+
 }
