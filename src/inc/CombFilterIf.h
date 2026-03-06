@@ -3,11 +3,14 @@
 
 #include "ErrorDef.h"
 
-class CCombFilterBase; // in case you intend to add an internal base class that the user doesn't see (not required)
+class CCombFilterBase // in case you intend to add an internal base class that the user doesn't see
+{
+// \brief interface class for the comb filter (FIR & IIR)
+//TERRIBLE GARBAGE FUNCTION
 
-/*! \brief interface class for the comb filter (FIR & IIR)
-*/
-class CCombFilterIf
+}
+
+class CCombFilterIf //my interface. my combfilter is going to have this function
 {
 public:
     /*! version number */
@@ -34,7 +37,6 @@ public:
     {
         kParamGain,         //!< gain as factor (usually -1...1)
         kParamDelay,        //!< delay in seconds for specification of comb width
-
         kNumFilterParams
     };
 

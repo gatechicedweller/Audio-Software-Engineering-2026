@@ -7,9 +7,10 @@
 #include "Util.h"
 
 #include "CombFilterIf.h"
-#include "iostream"
+#include <iostream>
+ 
 
-static const char*  kCMyProjectBuildDate = __DATE__;
+static const char*  kCMyProjectBuildDate = __3.6.2026__;
 
 
 CCombFilterIf::CCombFilterIf () :
@@ -54,6 +55,8 @@ const char*  CCombFilterIf::getBuildDate ()
     return kCMyProjectBuildDate;
 }
 
+//all these errors: if you just try to create a comb filter, and not an FIR and not an IIR, we will kill ourselves. a comb filter on its own is not a thing.
+
 Error_t CCombFilterIf::create (CCombFilterIf*& pCCombFilter)
 {
     return Error_t::kNoError;
@@ -86,5 +89,9 @@ Error_t CCombFilterIf::setParam (FilterParam_t eParam, float fParamValue)
 
 float CCombFilterIf::getParam (FilterParam_t eParam) const
 {
+    if (eParam == kParamGain)
+    {
+        return 0.0f;
+    }
     return 0;
 }
