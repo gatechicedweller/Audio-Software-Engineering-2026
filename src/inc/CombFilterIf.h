@@ -8,7 +8,7 @@ class CCombFilterBase // in case you intend to add an internal base class that t
 // \brief interface class for the comb filter (FIR & IIR)
 //TERRIBLE GARBAGE FUNCTION
 
-}
+};
 
 class CCombFilterIf //my interface. my combfilter is going to have this function
 {
@@ -70,25 +70,25 @@ public:
     \param iNumChannels number of audio channels
     \return Error_t
     */
-    Error_t init (CombFilterType_t eFilterType, float fMaxDelayLengthInS, float fSampleRateInHz, int iNumChannels);
+    virtual Error_t init (CombFilterType_t eFilterType, float fMaxDelayLengthInS, float fSampleRateInHz, int iNumChannels);
 
     /*! resets the internal variables (requires new call of init)
     \return Error_t
     */
-    Error_t reset ();
+    virtual Error_t reset ();
 
     /*! sets a comb filter parameter
     \param eParam what parameter (see ::FilterParam_t)
     \param fParamValue value of the parameter
     \return Error_t
     */
-    Error_t setParam (FilterParam_t eParam, float fParamValue);
+    virtual Error_t setParam (FilterParam_t eParam, float fParamValue);
 
     /*! return the value of the specified parameter
     \param eParam
     \return float
     */
-    float   getParam (FilterParam_t eParam) const;
+    virtual float   getParam (FilterParam_t eParam) const;
 
     /*! processes one block of audio
     \param ppfInputBuffer input buffer [numChannels][iNumberOfFrames]
@@ -96,7 +96,7 @@ public:
     \param iNumberOfFrames buffer length (per channel)
     \return Error_t
     */
-    Error_t process (float **ppfInputBuffer, float **ppfOutputBuffer, int iNumberOfFrames);
+    virtual Error_t process (float **ppfInputBuffer, float **ppfOutputBuffer, int iNumberOfFrames);
 
 protected:
     CCombFilterIf ();

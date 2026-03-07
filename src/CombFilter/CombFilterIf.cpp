@@ -10,7 +10,7 @@
 #include <iostream>
  
 
-static const char*  kCMyProjectBuildDate = __3.6.2026__;
+static const char*  kCMyProjectBuildDate = "3.6.2026";
 
 
 CCombFilterIf::CCombFilterIf () :
