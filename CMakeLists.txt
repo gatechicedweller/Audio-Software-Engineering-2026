@@ -4,6 +4,7 @@ project(MUSI6106
         VERSION 0.0.0.1
         LANGUAGES CXX C
 )
+enable_testing()
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -42,6 +43,13 @@ list(APPEND PROJECT_INCLUDES ${CMAKE_BINARY_DIR}/inc)
 
 # add directories
 add_src_directories()
+add_subdirectory(3rdparty/googletest)
+
+#assignment library
+add_subdirectory(src/Vibrato)
+
+# tests
+add_subdirectory(src/Tests/TestExec)
 
 # output version number variable
 message(STATUS ${PROJECT_NAME} Version: ${PROJECT_VERSION})
