@@ -94,9 +94,9 @@ namespace audiofile_test {
         CAudioFileIf    *m_pCAudioFile = 0;
         CAudioFileIf::FileSpec_t m_stFileSpec;
 
-        static const int m_iBuffLength  = 1027;
-        static const int m_iBlockLength = 17;
-        static const int m_iNumChannels = 2;
+        inline static const int m_iBuffLength  = 1027;
+        inline static const int m_iBlockLength = 17;
+        inline static const int m_iNumChannels = 2;
     };
 
     TEST_F(AudioIo, FileReadRaw)
@@ -109,7 +109,7 @@ namespace audiofile_test {
         float **ppfReadData  = new float*[m_iNumChannels];
         for (int i = 0; i < m_iNumChannels; i++)
             ppfReadData[i]   = new float[m_iBuffLength];
- 
+
         m_pCAudioFile->openFile (cTestDataDir+"/ref.pcm", CAudioFileIf::kFileRead, &m_stFileSpec);
 
         while (!m_pCAudioFile->isEof ())
@@ -181,7 +181,7 @@ namespace audiofile_test {
         long long   iFileLength = 0;
         long long   iNumRead    = 0;
         float **ppfReadData     = new float*[m_iNumChannels];
-        
+
         for (int i = 0; i < m_iNumChannels; i++)
             ppfReadData[i]      = new float[m_iBuffLength];
 
@@ -211,7 +211,7 @@ namespace audiofile_test {
         }
         int iNumRemainingFrames = m_iBuffLength;
         Error_t err = Error_t::kUnknownError;
-        
+
         err = m_pCAudioFile->openFile (cTestDataDir+"/test.pcm", CAudioFileIf::kFileWrite, &m_stFileSpec);
         EXPECT_TRUE(err == Error_t::kNoError);
 
@@ -262,7 +262,7 @@ namespace audiofile_test {
 
         // cleanup: delete file from disk -- permissions problem under win
         deleteFile (".pcm");
-        
+
     }
 
     TEST_F(AudioIo, FileWriteReadWav)
@@ -305,7 +305,7 @@ namespace audiofile_test {
         delete [] ppfReadData;
 
         m_pCAudioFile->closeFile ();
-        
+
         // cleanup
         deleteFile(cExt);
 
@@ -333,7 +333,7 @@ namespace audiofile_test {
         EXPECT_EQ(CAudioFileIf::kFileFormatWav, stFileSpec.eFormat);
 
         m_pCAudioFile->closeFile ();
-        
+
         // cleanup
         deleteFile(cExt);
     }
