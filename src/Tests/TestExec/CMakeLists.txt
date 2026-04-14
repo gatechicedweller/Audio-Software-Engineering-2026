@@ -31,7 +31,6 @@ add_executable(${APP}
 
 # link libraries
 target_link_libraries(${APP}
-        GTest::gtest
         GTest::gtest_main
         ${VibratoLIB}
         ${AudioLIB}

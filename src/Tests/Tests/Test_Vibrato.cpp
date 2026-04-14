@@ -49,7 +49,7 @@ namespace vibrato_test {
             }
         }
 
-        virtual void TearDown()
+        virtual void TearDown() override
         {
             for (int i = 0; i < m_iNumChannels; i++)
             {
