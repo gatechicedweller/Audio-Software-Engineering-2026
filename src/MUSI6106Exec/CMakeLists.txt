@@ -1,6 +1,10 @@
 set(APP MUSI6106Exec)
 
 set(AudioLIB AudioFileIO)
+set(VibratoLIB Vibrato)
+set(FftLIB Fft)
+set(FastConvLIB FastConv)
+set(CombFilterLIB CombFilter)
 
 ## get all source files
 file(GLOB ${APP}_SOURCES RELATIVE ${CMAKE_SOURCE_DIR}/src/${APP} *.c *.cpp)
@@ -18,4 +22,11 @@ target_include_directories(${APP} PRIVATE
 )
 
 # link the libraries
-target_link_libraries(${APP} PRIVATE ${AudioLIB} ${OS_LIBS})
+target_link_libraries(${APP} PRIVATE
+        ${AudioLIB}
+        ${VibratoLIB}
+        ${FftLIB}
+        ${FastConvLIB}
+        ${CombFilterLIB}
+        ${OS_LIBS}
+)

@@ -2,6 +2,9 @@ set(APP TestExec)
 
 set(VibratoLIB Vibrato)
 set(AudioLIB AudioFileIO)
+set(FftLIB Fft)
+set(FastConvLIB FastConv)
+set(CombFilterLIB CombFilter)
 set(SndLIB sndlib)
 
 ##############################################################
@@ -32,10 +35,12 @@ target_link_libraries(${APP}
         GTest::gtest_main
         ${VibratoLIB}
         ${AudioLIB}
+        ${FftLIB}
+        ${FastConvLIB}
+        ${CombFilterLIB}
         ${SndLIB}
         ${OS_LIBS}
 )
-
 # register with CTest
 include(GoogleTest)
 gtest_discover_tests(TestExec)
