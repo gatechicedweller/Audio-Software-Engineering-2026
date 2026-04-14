@@ -10,7 +10,6 @@ using std::endl;
 // local function declarations
 void    showClInfo ();
 
-/////////////////////////////////////////////////////////////////////////////////
 // main function
 int main(int argc, char* argv[])
 {
