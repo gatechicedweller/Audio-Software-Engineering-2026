@@ -115,7 +115,7 @@ public:
     {
         CVector::setZero(pfSrcDest, iLength);
     }
-    
+
     /*! sets all values smaller than a threshold to 0
     \param pfSrcDest pointer to memory to be modified
     \param iLength  buffer length
@@ -185,7 +185,7 @@ public:
     {
         assert (iLength >= 0);
         assert (pfSrcDest);
-        
+
         for (int i = 0; i < iLength; i++)
             pfSrcDest[i] *= fScale;
     }
@@ -314,6 +314,16 @@ public:
                 fResult += pfSrc[i];
         }
         return fResult;
+    }
+    /*! computes the sum of a vector (wrapper for sum())
+    \param pfSrc vector
+    \param iLength length of vector
+    \param bAbs specifies whether it is the sum of absolute values or not
+    \return float
+    */
+    static inline float getSum(const float *pfSrc, int iLength, bool bAbs = false)
+    {
+        return sum(pfSrc, iLength, bAbs);
     }
 
     /*! checks to buffer for equality (no floating point tolerance)

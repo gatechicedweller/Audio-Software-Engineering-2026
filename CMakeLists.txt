@@ -1,13 +1,15 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 project(MUSI6106
         VERSION 0.0.0.1
         LANGUAGES CXX C
 )
+enable_testing()
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(WITH_TESTS ON)
 
 #######################################################################################################
 ## includes
@@ -33,6 +35,10 @@ include(AddIncDirectories)
 set(PROJECT_DIRECTORIES)
 list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/${PROJECT_NAME}Exec)
 list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/AudioFileIO)
+list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/Fft)
+list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/Vibrato)
+list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/FastConv)
+list(APPEND PROJECT_DIRECTORIES ${CMAKE_SOURCE_DIR}/src/CombFilter)
 
 # set includes
 set(PROJECT_INCLUDES)
@@ -42,6 +48,10 @@ list(APPEND PROJECT_INCLUDES ${CMAKE_BINARY_DIR}/inc)
 
 # add directories
 add_src_directories()
+add_subdirectory(3rdparty/googletest)
+
+# tests
+add_subdirectory(src/Tests/TestExec)
 
 # output version number variable
 message(STATUS ${PROJECT_NAME} Version: ${PROJECT_VERSION})
