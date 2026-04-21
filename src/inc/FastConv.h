@@ -50,7 +50,8 @@ public:
     Error_t flushBuffer(float* pfOutputBuffer);
 
 private:
-
+    float* m_pfImpulseResponse = nullptr;
+    float* m_pfOutputBuffer = nullptr;
 };
 
 
